@@ -1,0 +1,320 @@
+/* ========================================
+   LogiFlow - Custom Styles
+   ======================================== */
+
+/* Base Resets */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0f1e;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0f1e; }
+::-webkit-scrollbar-thumb { background: #243049; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+
+/* ========================================
+   Glassmorphism Components
+   ======================================== */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+}
+
+.glass-nav {
+  background: rgba(10, 15, 30, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+
+.hero-gradient {
+  background: radial-gradient(ellipse at 20% 50%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+              #0a0f1e;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.08), transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -30px); }
+}
+
+/* ========================================
+   Buttons
+   ======================================== */
+
+.btn-neon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-neon:hover {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5), 0 0 40px rgba(6, 182, 212, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  color: #22d3ee;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: #22d3ee;
+}
+
+/* ========================================
+   Scroll Reveal Animation
+   ======================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   Gradient Text
+   ======================================== */
+
+.gradient-text {
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.counter-value {
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========================================
+   SVG World Map Animations
+   ======================================== */
+
+.shipping-route {
+  stroke: #06b6d4;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 8 4;
+  stroke-dashoffset: 0;
+  animation: dash 3s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.6));
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -24; }
+}
+
+.map-dot {
+  fill: #22d3ee;
+  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.8));
+}
+
+.map-dot-pulse {
+  fill: rgba(34, 211, 238, 0.3);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { r: 5; opacity: 0.6; }
+  50% { r: 10; opacity: 0; }
+}
+
+/* ========================================
+   Status Badges
+   ======================================== */
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge-delivered {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+.badge-transit {
+  background: rgba(6, 182, 212, 0.15);
+  color: #22d3ee;
+}
+
+.badge-pending {
+  background: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+}
+
+.badge-delayed {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+/* ========================================
+   Dashboard Sidebar
+   ======================================== */
+
+.sidebar {
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 72px !important;
+}
+
+.sidebar.collapsed .sidebar-label {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-logo-text {
+  display: none;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: #94a3b8;
+  transition: all 0.2s;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background: rgba(6, 182, 212, 0.1);
+  color: #22d3ee;
+}
+
+/* ========================================
+   Bento Grid
+   ======================================== */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.bento-grid .span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-grid .span-2 {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   Misc Utilities
+   ======================================== */
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 30;
+  display: none;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* Chart containers */
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.chart-container-sm {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogiFlow — Next-Gen Logistics Platform</title>
+
+  <!-- Tailwind CSS v4 Play CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-navy-950: #0a0f1e;
+      --color-navy-900: #0d1326;
+      --color-navy-800: #111827;
+      --color-navy-700: #1a2236;
+      --color-navy-600: #243049;
+      --color-cyan-400: #22d3ee;
+      --color-cyan-500: #06b6d4;
+      --color-neon: #00e5ff;
+      --font-sans: "Inter", sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-navy-950 text-slate-200 font-sans">
+
+  <!-- ========================================
+       1. NAVIGATION
+       ======================================== -->
+  <header class="glass-nav fixed top-0 left-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2">
+        <i data-lucide="box" class="w-7 h-7 text-cyan-400"></i>
+        <span class="text-xl font-bold text-white">Logi<span class="text-cyan-400">Flow</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#features" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Features</a>
+        <a href="#stats" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Stats</a>
+        <a href="#how-it-works" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">How It Works</a>
+        <a href="#testimonials" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Testimonials</a>
+      </nav>
+
+      <!-- Right Side -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="dashboard.html" class="text-sm text-slate-400 hover:text-white transition-colors">Login</a>
+        <a href="dashboard.html" class="btn-neon text-sm py-2 px-6">Get Started</a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button class="md:hidden text-slate-300" id="menu-toggle">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 px-6 pb-6">
+      <nav class="flex flex-col gap-4 pt-4">
+        <a href="#features" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Features</a>
+        <a href="#stats" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Stats</a>
+        <a href="#how-it-works" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">How It Works</a>
+        <a href="#testimonials" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Testimonials</a>
+        <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+          <a href="dashboard.html" class="text-sm text-slate-400 hover:text-white transition-colors">Login</a>
+          <a href="dashboard.html" class="btn-neon text-sm py-2 px-6">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================
+       2. HERO SECTION
+       ======================================== -->
+  <section class="hero-gradient relative min-h-screen flex items-center pt-20">
+    <!-- Floating Glow -->
+    <div class="hero-glow absolute top-1/4 -left-20"></div>
+    <div class="hero-glow absolute bottom-1/4 right-0" style="animation-delay: 4s;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <!-- Left Column -->
+      <div>
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 text-sm font-medium mb-6">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          Next-Gen Logistics Platform
+        </span>
+
+        <h1 class="text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
+          Global Shipping<br>
+          <span class="gradient-text">Reimagined</span>
+        </h1>
+
+        <p class="text-lg text-slate-400 mb-8 max-w-lg">
+          Streamline your supply chain with AI-powered route optimization, real-time tracking, and end-to-end visibility across 120+ countries.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 mb-10">
+          <a href="dashboard.html" class="btn-neon">
+            Start Shipping
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <button class="btn-outline">
+            <i data-lucide="play" class="w-4 h-4"></i>
+            Watch Demo
+          </button>
+        </div>
+
+        <!-- Tracking Search Bar -->
+        <div class="glass-card p-2 flex items-center max-w-lg">
+          <input
+            type="text"
+            id="track-input"
+            placeholder="Enter tracking number..."
+            class="flex-1 bg-transparent border-none outline-hidden text-white px-4 py-3 text-sm placeholder-slate-500"
+          >
+          <button id="track-btn" class="btn-neon px-6 py-3 text-sm">
+            <i data-lucide="search" class="w-4 h-4"></i>
+            Track
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Dashboard Preview -->
+      <div class="hidden lg:block">
+        <div class="glass-card p-6 relative overflow-hidden">
+          <!-- Mock mini dashboard -->
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-400"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+            </div>
+            <span class="text-xs text-slate-500">dashboard.logiflow.com</span>
+          </div>
+
+          <!-- KPI Preview Row -->
+          <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="bg-white/5 rounded-xl p-4">
+              <p class="text-xs text-slate-500 mb-1">Active Shipments</p>
+              <p class="text-xl font-bold text-white">2,847</p>
+              <span class="text-xs text-green-400">+12.5%</span>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <p class="text-xs text-slate-500 mb-1">On-Time Rate</p>
+              <p class="text-xl font-bold text-white">99.8%</p>
+              <span class="text-xs text-green-400">+0.3%</span>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <p class="text-xs text-slate-500 mb-1">Revenue</p>
+              <p class="text-xl font-bold text-white">$4.2M</p>
+              <span class="text-xs text-green-400">+18.2%</span>
+            </div>
+          </div>
+
+          <!-- Mock Chart Lines -->
+          <div class="bg-white/5 rounded-xl p-4 h-40 flex items-end gap-1">
+            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 40%"></div>
+            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 60%"></div>
+            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 45%"></div>
+            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 80%"></div>
+            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 65%"></div>
+            <div class="flex-1 bg-cyan-500/40 rounded-t" style="height: 90%"></div>
+            <div class="flex-1 bg-cyan-500/40 rounded-t" style="height: 75%"></div>
+            <div class="flex-1 bg-cyan-500/50 rounded-t" style="height: 95%"></div>
+            <div class="flex-1 bg-cyan-500/50 rounded-t" style="height: 85%"></div>
+            <div class="flex-1 bg-cyan-400/60 rounded-t" style="height: 100%"></div>
+            <div class="flex-1 bg-cyan-400/60 rounded-t" style="height: 88%"></div>
+            <div class="flex-1 bg-cyan-400/70 rounded-t" style="height: 92%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       3. FEATURES / SERVICES (Bento Grid)
+       ======================================== -->
+  <section id="features" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl lg:text-4xl font-bold text-white text-center mb-4">
+        Powerful Logistics Solutions
+      </h2>
+      <p class="text-slate-400 text-center mb-16 max-w-2xl mx-auto">
+        Everything you need to manage your global supply chain — from warehouse to doorstep.
+      </p>
+
+      <div class="bento-grid">
+        <!-- Card 1: Real-Time Tracking (span 2) -->
+        <div class="glass-card p-8 span-2 reveal">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-4">
+            <i data-lucide="truck" class="w-6 h-6 text-cyan-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Real-Time Tracking</h3>
+          <p class="text-sm text-slate-400">
+            Monitor every shipment in real-time with GPS precision. Get instant alerts on delays, route changes, and successful deliveries across your entire fleet.
+          </p>
+        </div>
+
+        <!-- Card 2: Smart Warehousing -->
+        <div class="glass-card p-8 reveal">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+            <i data-lucide="warehouse" class="w-6 h-6 text-purple-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Smart Warehousing</h3>
+          <p class="text-sm text-slate-400">
+            AI-driven inventory management with automated stock optimization and predictive demand forecasting.
+          </p>
+        </div>
+
+        <!-- Card 3: Route Optimization -->
+        <div class="glass-card p-8 reveal">
+          <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center mb-4">
+            <i data-lucide="route" class="w-6 h-6 text-green-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Route Optimization</h3>
+          <p class="text-sm text-slate-400">
+            Reduce transit times by up to 30% with machine learning-powered route planning and dynamic rerouting.
+          </p>
+        </div>
+
+        <!-- Card 4: Analytics Dashboard (span 2) -->
+        <div class="glass-card p-8 span-2 reveal">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-4">
+            <i data-lucide="bar-chart-3" class="w-6 h-6 text-blue-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Analytics Dashboard</h3>
+          <p class="text-sm text-slate-400">
+            Gain actionable insights with comprehensive analytics. Track KPIs, monitor performance trends, and make data-driven decisions with interactive reports and visualizations.
+          </p>
+        </div>
+
+        <!-- Card 5: Fleet Management -->
+        <div class="glass-card p-8 reveal">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+            <i data-lucide="ship" class="w-6 h-6 text-amber-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Fleet Management</h3>
+          <p class="text-sm text-slate-400">
+            Manage vehicles, vessels, and aircraft from a single dashboard with maintenance scheduling and fuel tracking.
+          </p>
+        </div>
+
+        <!-- Card 6: Last-Mile Delivery -->
+        <div class="glass-card p-8 reveal">
+          <div class="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center mb-4">
+            <i data-lucide="package-check" class="w-6 h-6 text-rose-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Last-Mile Delivery</h3>
+          <p class="text-sm text-slate-400">
+            Optimize final-mile logistics with smart dispatch, proof of delivery, and customer notifications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       4. STATS / METRICS
+       ======================================== -->
+  <section id="stats" class="py-24 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center reveal">
+        <div class="text-4xl lg:text-5xl font-extrabold counter-value mb-2" data-target="15000">0</div>
+        <span class="text-cyan-400 text-2xl font-bold">+</span>
+        <p class="text-slate-400 text-sm mt-2">Shipments Delivered</p>
+      </div>
+      <div class="text-center reveal">
+        <div class="text-4xl lg:text-5xl font-extrabold counter-value mb-2" data-target="120">0</div>
+        <span class="text-cyan-400 text-2xl font-bold">+</span>
+        <p class="text-slate-400 text-sm mt-2">Countries Served</p>
+      </div>
+      <div class="text-center reveal">
+        <div class="text-4xl lg:text-5xl font-extrabold counter-value mb-2" data-target="99.8" data-decimal="true">0</div>
+        <span class="text-cyan-400 text-2xl font-bold">%</span>
+        <p class="text-slate-400 text-sm mt-2">On-Time Delivery</p>
+      </div>
+      <div class="text-center reveal">
+        <div class="text-4xl lg:text-5xl font-extrabold counter-value mb-2" data-target="24">0</div>
+        <span class="text-cyan-400 text-2xl font-bold">/7</span>
+        <p class="text-slate-400 text-sm mt-2">Customer Support</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       5. HOW IT WORKS
+       ======================================== -->
+  <section id="how-it-works" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl lg:text-4xl font-bold text-white text-center mb-4">
+        How It Works
+      </h2>
+      <p class="text-slate-400 text-center mb-16 max-w-2xl mx-auto">
+        Get your shipment moving in four simple steps.
+      </p>
+
+      <div class="grid md:grid-cols-4 gap-8 relative">
+        <!-- Connecting Line -->
+        <div class="hidden md:block absolute top-12 left-[12.5%] w-[75%] h-px bg-gradient-to-r from-cyan-500/50 via-cyan-500/20 to-cyan-500/50"></div>
+
+        <!-- Step 1 -->
+        <div class="text-center reveal">
+          <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center mx-auto mb-4 text-lg relative z-10">
+            1
+          </div>
+          <div class="w-10 h-10 flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="clipboard-list" class="w-5 h-5 text-slate-400"></i>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Book Shipment</h3>
+          <p class="text-sm text-slate-400">Enter pickup and delivery details through our simple booking interface.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center reveal">
+          <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center mx-auto mb-4 text-lg relative z-10">
+            2
+          </div>
+          <div class="w-10 h-10 flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="package" class="w-5 h-5 text-slate-400"></i>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Package Pickup</h3>
+          <p class="text-sm text-slate-400">Our fleet picks up your cargo from the specified location on schedule.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center reveal">
+          <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center mx-auto mb-4 text-lg relative z-10">
+            3
+          </div>
+          <div class="w-10 h-10 flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="radar" class="w-5 h-5 text-slate-400"></i>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Real-Time Tracking</h3>
+          <p class="text-sm text-slate-400">Monitor your shipment's journey with live GPS tracking and status updates.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="text-center reveal">
+          <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center mx-auto mb-4 text-lg relative z-10">
+            4
+          </div>
+          <div class="w-10 h-10 flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="circle-check" class="w-5 h-5 text-slate-400"></i>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Delivered</h3>
+          <p class="text-sm text-slate-400">Receive confirmation with proof of delivery and automated invoicing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       6. TESTIMONIALS
+       ======================================== -->
+  <section id="testimonials" class="py-24 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl lg:text-4xl font-bold text-white text-center mb-4">
+        Trusted by Industry Leaders
+      </h2>
+      <p class="text-slate-400 text-center mb-16 max-w-2xl mx-auto">
+        See what our partners are saying about LogiFlow.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="glass-card p-8 reveal">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+          </div>
+          <p class="text-slate-300 mb-6 text-sm leading-relaxed italic">
+            "LogiFlow transformed our supply chain operations. We reduced shipping costs by 22% and improved delivery times by 35% in just three months."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-sm">SM</div>
+            <div>
+              <p class="text-white font-semibold text-sm">Sarah Mitchell</p>
+              <p class="text-slate-400 text-xs">VP of Operations, TechCorp</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="glass-card p-8 reveal">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+          </div>
+          <p class="text-slate-300 mb-6 text-sm leading-relaxed italic">
+            "The real-time tracking and analytics dashboard give us complete visibility. We can now make decisions in minutes that used to take days."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold text-sm">JC</div>
+            <div>
+              <p class="text-white font-semibold text-sm">James Chen</p>
+              <p class="text-slate-400 text-xs">Supply Chain Director, GlobalMart</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="glass-card p-8 reveal">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+          </div>
+          <p class="text-slate-300 mb-6 text-sm leading-relaxed italic">
+            "Best logistics platform we've used. The route optimization alone saved us over $1.5M annually. Their support team is phenomenal."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-bold text-sm">AR</div>
+            <div>
+              <p class="text-white font-semibold text-sm">Amara Rodriguez</p>
+              <p class="text-slate-400 text-xs">CEO, FastFreight Inc.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       7. CTA SECTION
+       ======================================== -->
+  <section class="py-24">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="glass-card p-12 text-center relative overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Ready to Streamline Your Logistics?
+          </h2>
+          <p class="text-slate-400 mb-8 max-w-xl mx-auto">
+            Join thousands of businesses that trust LogiFlow to deliver their goods faster, cheaper, and smarter.
+          </p>
+          <a href="dashboard.html" class="btn-neon text-base px-8 py-4">
+            Get Started Free
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       8. FOOTER
+       ======================================== -->
+  <footer class="border-t border-white/5 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-12">
+        <!-- Column 1: Logo & Description -->
+        <div>
+          <a href="index.html" class="flex items-center gap-2 mb-4">
+            <i data-lucide="box" class="w-6 h-6 text-cyan-400"></i>
+            <span class="text-lg font-bold text-white">Logi<span class="text-cyan-400">Flow</span></span>
+          </a>
+          <p class="text-sm text-slate-400 mb-6">
+            Next-generation logistics platform powering global supply chains with intelligence and precision.
+          </p>
+          <div class="flex items-center gap-4">
+            <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors">
+              <i data-lucide="twitter" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors">
+              <i data-lucide="github" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Product -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">Product</h4>
+          <ul class="space-y-3">
+            <li><a href="#features" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Features</a></li>
+            <li><a href="dashboard.html" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Dashboard</a></li>
+            <li><a href="#" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Pricing</a></li>
+            <li><a href="#" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">API Docs</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Company -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">Company</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">About Us</a></li>
+            <li><a href="#" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Careers</a></li>
+            <li><a href="#" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Blog</a></li>
+            <li><a href="#" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Press</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">Contact</h4>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-2 text-sm text-slate-400">
+              <i data-lucide="mail" class="w-4 h-4 text-cyan-400"></i>
+              hello@logiflow.com
+            </li>
+            <li class="flex items-center gap-2 text-sm text-slate-400">
+              <i data-lucide="phone" class="w-4 h-4 text-cyan-400"></i>
+              +1 (555) 123-4567
+            </li>
+            <li class="flex items-center gap-2 text-sm text-slate-400">
+              <i data-lucide="map-pin" class="w-4 h-4 text-cyan-400"></i>
+              San Francisco, CA
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/5 mt-12 pt-8 text-center text-slate-500 text-sm">
+        &copy; 2026 LogiFlow. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogiFlow — Dashboard</title>
+
+  <!-- Tailwind CSS v4 Play CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-navy-950: #0a0f1e;
+      --color-navy-900: #0d1326;
+      --color-navy-800: #111827;
+      --color-navy-700: #1a2236;
+      --color-navy-600: #243049;
+      --color-cyan-400: #22d3ee;
+      --color-cyan-500: #06b6d4;
+      --color-neon: #00e5ff;
+      --font-sans: "Inter", sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-navy-950 text-slate-200 font-sans flex h-screen overflow-hidden">
+
+  <!-- ========================================
+       SIDEBAR OVERLAY (Mobile)
+       ======================================== -->
+  <div id="sidebar-overlay" class="sidebar-overlay lg:hidden" onclick="toggleMobileSidebar()"></div>
+
+  <!-- ========================================
+       SIDEBAR
+       ======================================== -->
+  <aside id="sidebar" class="sidebar w-64 bg-navy-900 border-r border-white/5 flex flex-col h-screen fixed lg:relative z-40 -translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <!-- Logo -->
+    <div class="px-6 py-5 border-b border-white/5 flex items-center gap-2">
+      <i data-lucide="box" class="w-7 h-7 text-cyan-400 shrink-0"></i>
+      <span class="text-xl font-bold text-white sidebar-logo-text">Logi<span class="text-cyan-400">Flow</span></span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+      <a href="#" class="sidebar-link active">
+        <i data-lucide="layout-dashboard" class="w-5 h-5 shrink-0"></i>
+        <span class="sidebar-label">Dashboard</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i data-lucide="truck" class="w-5 h-5 shrink-0"></i>
+        <span class="sidebar-label">Shipments</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i data-lucide="bar-chart-3" class="w-5 h-5 shrink-0"></i>
+        <span class="sidebar-label">Analytics</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i data-lucide="warehouse" class="w-5 h-5 shrink-0"></i>
+        <span class="sidebar-label">Warehouses</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i data-lucide="ship" class="w-5 h-5 shrink-0"></i>
+        <span class="sidebar-label">Fleet</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i data-lucide="route" class="w-5 h-5 shrink-0"></i>
+        <span class="sidebar-label">Routes</span>
+      </a>
+
+      <div class="border-t border-white/5 my-4"></div>
+
+      <a href="#" class="sidebar-link">
+        <i data-lucide="settings" class="w-5 h-5 shrink-0"></i>
+        <span class="sidebar-label">Settings</span>
+      </a>
+    </nav>
+
+    <!-- Collapse Toggle (Desktop) -->
+    <div class="px-4 py-4 border-t border-white/5 hidden lg:block">
+      <button id="sidebar-toggle" class="sidebar-link w-full justify-center lg:justify-start">
+        <i data-lucide="chevron-left" class="w-5 h-5 shrink-0"></i>
+        <span class="sidebar-label text-sm">Collapse</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+
+    <!-- TOP BAR -->
+    <header class="glass-nav px-6 py-4 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-4">
+        <!-- Mobile Hamburger -->
+        <button class="lg:hidden text-slate-300" id="mobile-sidebar-toggle" onclick="toggleMobileSidebar()">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+        <h1 class="text-lg font-semibold text-white">Dashboard</h1>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="hidden md:flex items-center bg-navy-800 rounded-lg px-4 py-2 w-80 border border-white/5">
+        <i data-lucide="search" class="w-4 h-4 text-slate-500 mr-3"></i>
+        <input type="text" placeholder="Search shipments, routes..." class="bg-transparent border-none outline-hidden text-sm text-white placeholder-slate-500 w-full">
+      </div>
+
+      <!-- Right Side -->
+      <div class="flex items-center gap-4">
+        <!-- Notification Bell -->
+        <button class="relative text-slate-400 hover:text-white transition-colors">
+          <i data-lucide="bell" class="w-5 h-5"></i>
+          <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-navy-900"></span>
+        </button>
+
+        <!-- User Avatar -->
+        <div class="w-9 h-9 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-sm cursor-pointer">
+          JD
+        </div>
+      </div>
+    </header>
+
+    <!-- SCROLLABLE CONTENT -->
+    <main class="flex-1 overflow-y-auto p-6 space-y-6">
+
+      <!-- ----------------------------------------
+           KPI CARDS ROW
+           ---------------------------------------- -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Total Shipments -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center">
+              <i data-lucide="package" class="w-5 h-5 text-cyan-400"></i>
+            </div>
+            <span class="text-green-400 text-xs flex items-center gap-1">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              +12.5%
+            </span>
+          </div>
+          <p class="text-2xl font-bold text-white">12,847</p>
+          <p class="text-slate-400 text-sm mt-1">Total Shipments</p>
+        </div>
+
+        <!-- In Transit -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+              <i data-lucide="truck" class="w-5 h-5 text-blue-400"></i>
+            </div>
+            <span class="text-green-400 text-xs flex items-center gap-1">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              +8.3%
+            </span>
+          </div>
+          <p class="text-2xl font-bold text-white">3,421</p>
+          <p class="text-slate-400 text-sm mt-1">In Transit</p>
+        </div>
+
+        <!-- Delivered -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
+              <i data-lucide="circle-check" class="w-5 h-5 text-green-400"></i>
+            </div>
+            <span class="text-green-400 text-xs flex items-center gap-1">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              +15.2%
+            </span>
+          </div>
+          <p class="text-2xl font-bold text-white">9,126</p>
+          <p class="text-slate-400 text-sm mt-1">Delivered</p>
+        </div>
+
+        <!-- Revenue -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
+              <i data-lucide="dollar-sign" class="w-5 h-5 text-amber-400"></i>
+            </div>
+            <span class="text-green-400 text-xs flex items-center gap-1">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              +18.7%
+            </span>
+          </div>
+          <p class="text-2xl font-bold text-white">$4.2M</p>
+          <p class="text-slate-400 text-sm mt-1">Revenue (MTD)</p>
+        </div>
+      </div>
+
+      <!-- ----------------------------------------
+           WORLD MAP SECTION
+           ---------------------------------------- -->
+      <div class="glass-card p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-semibold text-white">Global Shipping Routes</h2>
+          <div class="flex items-center gap-2">
+            <button class="text-xs px-3 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Live</button>
+            <button class="text-xs px-3 py-1.5 rounded-lg text-slate-400 hover:bg-white/5 transition-colors">24h</button>
+            <button class="text-xs px-3 py-1.5 rounded-lg text-slate-400 hover:bg-white/5 transition-colors">7d</button>
+          </div>
+        </div>
+        <div class="w-full overflow-hidden rounded-xl bg-navy-950/50">
+          <img src="assets/world-map.svg" alt="Global Shipping Routes" class="w-full h-auto">
+        </div>
+      </div>
+
+      <!-- ----------------------------------------
+           CHARTS ROW
+           ---------------------------------------- -->
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Shipment Volume (span 2) -->
+        <div class="glass-card p-6 lg:col-span-2">
+          <h3 class="text-lg font-semibold text-white mb-6">Shipment Volume</h3>
+          <div class="chart-container">
+            <canvas id="shipmentChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Delivery Status Doughnut -->
+        <div class="glass-card p-6">
+          <h3 class="text-lg font-semibold text-white mb-6">Delivery Status</h3>
+          <div class="chart-container-sm">
+            <canvas id="statusChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revenue by Region -->
+      <div class="glass-card p-6">
+        <h3 class="text-lg font-semibold text-white mb-6">Revenue by Region</h3>
+        <div class="chart-container">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+
+      <!-- ----------------------------------------
+           RECENT SHIPMENTS TABLE
+           ---------------------------------------- -->
+      <div class="glass-card overflow-hidden">
+        <div class="p-6 border-b border-white/5 flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-white">Recent Shipments</h3>
+          <a href="#" class="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">View All</a>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="text-xs text-slate-400 uppercase border-b border-white/5">
+                <th class="text-left px-6 py-4 font-medium">Tracking ID</th>
+                <th class="text-left px-6 py-4 font-medium">Origin</th>
+                <th class="text-left px-6 py-4 font-medium">Destination</th>
+                <th class="text-left px-6 py-4 font-medium">Status</th>
+                <th class="text-left px-6 py-4 font-medium">ETA</th>
+                <th class="text-left px-6 py-4 font-medium">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                <td class="px-6 py-4 text-sm font-mono text-white">LF-2847391</td>
+                <td class="px-6 py-4 text-sm text-slate-300">New York, US</td>
+                <td class="px-6 py-4 text-sm text-slate-300">London, UK</td>
+                <td class="px-6 py-4"><span class="badge badge-transit">In Transit</span></td>
+                <td class="px-6 py-4 text-sm text-slate-400">Mar 26, 2026</td>
+                <td class="px-6 py-4"><button class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="eye" class="w-4 h-4"></i></button></td>
+              </tr>
+              <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                <td class="px-6 py-4 text-sm font-mono text-white">LF-2847390</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Shanghai, CN</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Dubai, AE</td>
+                <td class="px-6 py-4"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="px-6 py-4 text-sm text-slate-400">Mar 22, 2026</td>
+                <td class="px-6 py-4"><button class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="eye" class="w-4 h-4"></i></button></td>
+              </tr>
+              <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                <td class="px-6 py-4 text-sm font-mono text-white">LF-2847389</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Singapore, SG</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Sydney, AU</td>
+                <td class="px-6 py-4"><span class="badge badge-transit">In Transit</span></td>
+                <td class="px-6 py-4 text-sm text-slate-400">Mar 27, 2026</td>
+                <td class="px-6 py-4"><button class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="eye" class="w-4 h-4"></i></button></td>
+              </tr>
+              <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                <td class="px-6 py-4 text-sm font-mono text-white">LF-2847388</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Lagos, NG</td>
+                <td class="px-6 py-4 text-sm text-slate-300">São Paulo, BR</td>
+                <td class="px-6 py-4"><span class="badge badge-pending">Pending</span></td>
+                <td class="px-6 py-4 text-sm text-slate-400">Mar 30, 2026</td>
+                <td class="px-6 py-4"><button class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="eye" class="w-4 h-4"></i></button></td>
+              </tr>
+              <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                <td class="px-6 py-4 text-sm font-mono text-white">LF-2847387</td>
+                <td class="px-6 py-4 text-sm text-slate-300">London, UK</td>
+                <td class="px-6 py-4 text-sm text-slate-300">New York, US</td>
+                <td class="px-6 py-4"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="px-6 py-4 text-sm text-slate-400">Mar 20, 2026</td>
+                <td class="px-6 py-4"><button class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="eye" class="w-4 h-4"></i></button></td>
+              </tr>
+              <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                <td class="px-6 py-4 text-sm font-mono text-white">LF-2847386</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Dubai, AE</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Mumbai, IN</td>
+                <td class="px-6 py-4"><span class="badge badge-delayed">Delayed</span></td>
+                <td class="px-6 py-4 text-sm text-slate-400">Mar 28, 2026</td>
+                <td class="px-6 py-4"><button class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="eye" class="w-4 h-4"></i></button></td>
+              </tr>
+              <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                <td class="px-6 py-4 text-sm font-mono text-white">LF-2847385</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Tokyo, JP</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Los Angeles, US</td>
+                <td class="px-6 py-4"><span class="badge badge-transit">In Transit</span></td>
+                <td class="px-6 py-4 text-sm text-slate-400">Mar 29, 2026</td>
+                <td class="px-6 py-4"><button class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="eye" class="w-4 h-4"></i></button></td>
+              </tr>
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="px-6 py-4 text-sm font-mono text-white">LF-2847384</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Hamburg, DE</td>
+                <td class="px-6 py-4 text-sm text-slate-300">Shanghai, CN</td>
+                <td class="px-6 py-4"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="px-6 py-4 text-sm text-slate-400">Mar 19, 2026</td>
+                <td class="px-6 py-4"><button class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="eye" class="w-4 h-4"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ----------------------------------------
+           ACTIVITY FEED
+           ---------------------------------------- -->
+      <div class="glass-card p-6">
+        <h3 class="text-lg font-semibold text-white mb-6">Recent Activity</h3>
+        <div class="space-y-0">
+          <div class="flex items-start gap-4 py-3 border-b border-white/5">
+            <div class="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="circle-check" class="w-4 h-4 text-green-400"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-slate-300">Shipment <span class="text-white font-medium">LF-2847390</span> delivered to Dubai, AE</p>
+              <span class="text-xs text-slate-500">2 hours ago</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 py-3 border-b border-white/5">
+            <div class="w-8 h-8 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="truck" class="w-4 h-4 text-cyan-400"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-slate-300">Shipment <span class="text-white font-medium">LF-2847391</span> departed from New York hub</p>
+              <span class="text-xs text-slate-500">4 hours ago</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 py-3 border-b border-white/5">
+            <div class="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-slate-300">Delay alert: <span class="text-white font-medium">LF-2847386</span> rerouted due to weather conditions</p>
+              <span class="text-xs text-slate-500">6 hours ago</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 py-3 border-b border-white/5">
+            <div class="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="user-plus" class="w-4 h-4 text-purple-400"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-slate-300">New client <span class="text-white font-medium">Meridian Industries</span> onboarded</p>
+              <span class="text-xs text-slate-500">8 hours ago</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 py-3 border-b border-white/5">
+            <div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="package" class="w-4 h-4 text-blue-400"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-slate-300">Bulk order <span class="text-white font-medium">#BO-9921</span> — 340 packages queued for dispatch</p>
+              <span class="text-xs text-slate-500">12 hours ago</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 py-3">
+            <div class="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="circle-check" class="w-4 h-4 text-green-400"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-slate-300">Shipment <span class="text-white font-medium">LF-2847384</span> delivered to Shanghai warehouse</p>
+              <span class="text-xs text-slate-500">1 day ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
